@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج خطاب قبول طالب - متجر عروق الذهب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+:root {
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  📏 أبعاد الورقة A4                    │ */
+    /* └─────────────────────────────────────────┘ */
+    --page-width: 210mm;
+    --page-height: 297mm;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  📐 هوامش منطقة المحتوى               │ */
+    /* └─────────────────────────────────────────┘ */
+    --content-margin-top: 40mm;
+    --content-margin-bottom: 35mm;
+    --content-margin-left: 13mm;
+    --content-margin-right: 13mm;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  📊 أبعاد منطقة المحتوى الناتجة       │ */
+    /* └─────────────────────────────────────────┘ */
+    --content-width: calc(var(--page-width) - var(--content-margin-left) - var(--content-margin-right));
+    --content-height: calc(var(--page-height) - var(--content-margin-top) - var(--content-margin-bottom));
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  🔀 تقسيم الخطاب                      │ */
+    /* └─────────────────────────────────────────┘ */
+    --first-section-height: 100mm;
+    --section-gap: 10mm;
+    --divider-thickness: 2mm;
+    --divider-offset: 10mm; /* إنزال الخط الفاصل */
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  📝 تباعد الأسطر                       │ */
+    /* └─────────────────────────────────────────┘ */
+    --line-spacing: 1.8;
+    --paragraph-spacing: 3mm;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  📅 موضع التاريخ                      │ */
+    /* └─────────────────────────────────────────┘ */
+    --date-top: 27mm;
+    --date-left: 16mm;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  🆔 موضع رقم الهوية                   │ */
+    /* └─────────────────────────────────────────┘ */
+    --id-top: 125mm;
+    --id-right: 19mm;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  📋 صندوق المرفقات - مُحدَّث ✅        │ */
+    /* └─────────────────────────────────────────┘ */
+    --attachments-bottom: 35mm; /* ✅ رفع صندوق المرفقات 1 سم */
+    --attachments-right: 16mm;
+    --attachments-max-width: 70mm;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  ✍️ توقيع المدير                      │ */
+    /* └─────────────────────────────────────────┘ */
+    --signature1-top: 125mm; /* نفس ارتفاع رقم الهوية */
+    --signature1-left: 11mm;
+    --signature-width: 80mm;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  ✍️ توقيع المدرسة - مُحدَّث ✅         │ */
+    /* └─────────────────────────────────────────┘ */
+    --signature2-bottom: 35mm; /* ✅ رفع التوقيع الثاني 1 سم */
+    --signature2-left: 11mm;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  🏷️ مواضع كلمة "ختم" - مُحدَّث ✅      │ */
+    /* └─────────────────────────────────────────┘ */
+    --stamp1-top: 125mm; /* نفس ارتفاع رقم الهوية والتوقيع */
+    --stamp2-top: 250mm; /* ✅ رفع ختم الجزء الثاني 1 سم */
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  🎨 ألوان الهوية البصرية              │ */
+    /* └─────────────────────────────────────────┘ */
+    --primary-color: #004956;
+    --accent-color: #d4af37;
+    --text-color: #333;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --border-gray: #d3d3d3;
+    --section-header-color: #8B0000;
+    
+    /* ألوان الهوية البصرية للوزارة للخط الفاصل */
+    --ministry-blue: #3D7EB9;
+    --ministry-green: #07A869;
+
+    /* ┌─────────────────────────────────────────┐ */
+    /* │  🆕 متغير العنوان الجديد - الحل ✅    │ */
+    /* └─────────────────────────────────────────┘ */
+    --header-gap-from-divider: -7mm; /* ✅ 1.5 سم من الخط الفاصل - غير هذه القيمة للتحكم */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: var(--text-color);
+    line-height: 1.6;
+    direction: rtl;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    border: 3px solid var(--primary-color);
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+header p {
+    color: var(--accent-color);
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.form-container {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(2px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    margin-bottom: 30px;
+    border: 3px solid var(--primary-color);
+}
+
+.section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 2px solid var(--accent-color);
+    border-radius: 12px;
+    background: #f7f9ff;
+}
+
+.section h2 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 18px;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    font-size: 20px;
+    transition: all 0.25s;
+    direction: rtl;
+    color: var(--primary-color);
+    font-weight: 600;
+    background: var(--white);
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 6px rgba(212,175,55,0.45);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gender-options {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.gender-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 35px;
+    border: 3px solid var(--primary-color);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-color);
+    background: var(--white);
+}
+
+.gender-option:hover {
+    background: var(--accent-color);
+    color: var(--white);
+}
+
+.gender-option input[type="radio"] {
+    width: auto;
+    margin: 0;
+    transform: scale(1.8);
+}
+
+.gender-option.selected {
+    background: var(--accent-color);
+    color: var(--white) !important;
+    border-color: var(--accent-color);
+}
+
+.gender-option.selected input[type="radio"] {
+    accent-color: var(--white);
+}
+
+.gender-option.selected label {
+    color: var(--white) !important;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: var(--white);
+}
+
+.checkbox-item:hover {
+    background: var(--light-gray);
+    border-color: var(--accent-color);
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-item label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.checkbox-item.checked {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox-item.checked label {
+    color: var(--white);
+}
+
+.id-hint {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.action-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.action-btn {
+    padding: 18px 45px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 0 10px;
+}
+
+.preview-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--white);
+}
+
+.preview-btn:hover {
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    transform: translateY(-2px);
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: var(--white);
+}
+
+.reset-btn:hover {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+    transform: translateY(-2px);
+}
+
+.warning-message {
+    background: #fff3cd;
+    color: #856404;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid var(--accent-color);
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.warning-message strong {
+    color: var(--primary-color);
+}
+
+.clear-data-btn {
+    padding: 10px 20px !important;
+    background: #e74c3c !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s !important;
+}
+
+.clear-data-btn:hover {
+    background: #c0392b !important;
+    transform: translateY(-1px) !important;
+}
+
+.preview-container {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    border: 2px solid var(--primary-color);
+}
+
+.pdf-preview {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.pdf-content {
+    width: var(--page-width);
+    height: var(--page-height);
+    background: var(--white);
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.official-template {
+    background-image: url('template.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 0;
+}
+
+.letter-header-area {
+    position: absolute;
+    top: 12mm;
+    right: 56mm;
+    width: 95mm;
+    height: 25mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    padding: 3mm;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.document-content {
+    position: absolute;
+    top: var(--content-margin-top);
+    left: var(--content-margin-left);
+    right: var(--content-margin-right);
+    bottom: var(--content-margin-bottom);
+    width: var(--content-width);
+    height: var(--content-height);
+    overflow: hidden;
+}
+
+.letter-content {
+    background: transparent !important;
+    padding: 3mm;
+    border-radius: 3mm;
+    margin-bottom: var(--paragraph-spacing);
+    font-size: 16px;
+    line-height: var(--line-spacing);
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: center;
+}
+
+.letter-content p {
+    margin-bottom: var(--paragraph-spacing);
+    line-height: var(--line-spacing);
+}
+
+.letter-section {
+    margin-bottom: var(--paragraph-spacing);
+    padding: 2mm;
+    background: transparent !important;
+    border-radius: 3mm;
+    text-align: center;
+    line-height: var(--line-spacing);
+}
+
+.first-section {
+    height: var(--first-section-height);
+}
+
+/* الخط الفاصل - منزل 1 سم + ألوان الهوية */
+.section-divider {
+    height: var(--divider-thickness);
+    background: linear-gradient(90deg, var(--ministry-blue), var(--ministry-green));
+    margin: calc(var(--section-gap) + var(--divider-offset)) 0 var(--section-gap) 0;
+    border-radius: 2px;
+}
+
+/* ✅ عنوان الجزء الثاني - الحل الجديد */
+.section-header-special {
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    color: var(--section-header-color) !important;
+    margin-top: var(--header-gap-from-divider) !important; /* ✅ مسافة مستقلة من الخط الفاصل */
+    margin-bottom: 4mm !important; /* ✅ مسافة ثابتة للمحتوى تحته */
+    padding: 2mm 0 !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
+}
+
+/* ✅ محتوى الجزء الثاني - مُبسَّط */
+.second-section-content {
+    margin-top: 0 !important; /* ✅ إلغاء المتغيرات المعقدة */
+    /* المسافة محكومة بـ margin-bottom للعنوان */
+}
+
+.letter-date-display {
+    position: absolute;
+    top: var(--date-top);
+    left: var(--date-left);
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: 600;
+    background: transparent !important;
+    padding: 2mm;
+    border-radius: 3mm;
+    z-index: 10;
+}
+
+.student-id-display {
+    position: absolute;
+    top: var(--id-top);
+    right: var(--id-right);
+    font-size: 12px;
+    color: #666;
+    padding: 2mm;
+    background: transparent !important;
+    border-radius: 3mm;
+    z-index: 10;
+    text-align: center !important;
+    max-width: 70mm;
+    transform: none;
+}
+
+.attachments-box {
+    position: absolute;
+    bottom: var(--attachments-bottom);
+    right: var(--attachments-right);
+    max-width: var(--attachments-max-width);
+    padding: 2mm;
+    background: transparent !important;
+    border: 2px solid var(--primary-color);
+    border-radius: 3mm;
+    font-size: 11px;
+    color: var(--primary-color);
+    z-index: 10;
+    line-height: 1.4;
+}
+
+.director-signature {
+    position: absolute !important;
+    top: var(--signature1-top) !important;
+    left: var(--signature1-left) !important;
+    width: var(--signature-width) !important;
+    text-align: center !important;
+    font-size: 16px !important;
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    z-index: 15 !important;
+    line-height: var(--line-spacing) !important;
+    background: transparent !important;
+    padding: 1mm !important;
+    border-radius: 2mm !important;
+    transform: translateZ(0) !important;
+}
+
+.signature-left {
+    position: absolute !important;
+    bottom: var(--signature2-bottom) !important;
+    left: var(--signature2-left) !important;
+    width: var(--signature-width) !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    z-index: 15 !important;
+    line-height: var(--line-spacing) !important;
+    background: transparent !important;
+    padding: 1mm !important;
+    border-radius: 2mm !important;
+    transform: translateZ(0) !important;
+}
+
+.stamp {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #ccc;
+    font-size: 13px;
+    font-style: italic;
+    letter-spacing: 2px;
+    background: transparent !important;
+    pointer-events: none;
+}
+
+.stamp-first {
+    top: var(--stamp1-top);
+}
+
+.stamp-second {
+    top: var(--stamp2-top);
+}
+
+.signature-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: var(--paragraph-spacing);
+    padding: 2mm;
+    background: transparent !important;
+    border-radius: 3mm;
+}
+
+.signature-right {
+    text-align: right;
+    width: 45%;
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: 600;
+    line-height: var(--line-spacing);
+}
+
+.dotted-line {
+    color: var(--border-gray);
+    font-weight: 300;
+}
+
+.date-fields {
+    margin-top: 2mm;
+    text-align: center;
+    font-size: 14px;
+    color: var(--primary-color);
+    line-height: var(--line-spacing);
+}
+
+.action-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.action-buttons h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.print-btn, .new-document-btn {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: all 0.3s;
+}
+
+.print-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--white);
+}
+
+.new-document-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: var(--white);
+}
+
+.print-btn:hover, .new-document-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.pdf-note {
+    background: #e8f5e8;
+    color: #2d5a2d;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #28a745;
+    margin: 15px 0;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.pdf-note strong {
+    color: var(--primary-color);
+}
+
+.pdf-note .icon {
+    font-size: 18px;
+    margin-left: 8px;
+}
+
+.footer {
+    text-align: center;
+    padding: 25px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 15px;
+    margin-top: 30px;
+    font-size: 16px;
+    border: 3px solid var(--accent-color);
+}
+
+.footer p {
+    margin: 8px 0;
+}
+
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .gender-options {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .pdf-content {
+        width: 100%;
+        height: auto;
+        min-height: var(--page-height);
+    }
+    
+    .signature-section {
+        flex-direction: column;
+        gap: 2mm;
+    }
+    
+    .signature-left, .signature-right {
+        position: relative;
+        width: 100%;
+        left: auto;
+        bottom: auto;
+    }
+    
+    .director-signature {
+        position: relative;
+        left: auto;
+        top: auto;
+    }
+}
+
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    @page {
+        size: A4 portrait;
+        margin: 0 !important;
+    }
+    
+    body {
+        background: var(--white) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 12px !important;
+        transform: translateZ(0) !important;
+    }
+    
+    .container {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: var(--white) !important;
+        max-width: none !important;
+        transform: translateZ(0) !important;
+    }
+    
+    header,
+    .form-container,
+    .footer,
+    .action-buttons,
+    .action-buttons h2,
+    .print-btn,
+    .new-document-btn,
+    .pdf-note {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    .preview-container {
+        display: block !important;
+        background: var(--white) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+        transform: translateZ(0) !important;
+    }
+    
+    .pdf-preview {
+        background: var(--white) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        overflow: visible !important;
+        transform: translateZ(0) !important;
+    }
+    
+    .pdf-content {
+        width: var(--page-width) !important;
+        height: var(--page-height) !important;
+        max-width: var(--page-width) !important;
+        max-height: var(--page-height) !important;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+        page-break-before: avoid !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: translateZ(0) !important;
+        position: relative !important;
+    }
+    
+    .official-template {
+        background-image: url('template.png') !important;
+        background-size: 100% 100% !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        width: 100% !important;
+        height: 100% !important;
+        page-break-inside: avoid !important;
+        transform: translateZ(0) !important;
+        position: relative !important;
+    }
+    
+    .letter-header-area {
+        color: var(--white) !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    .document-content {
+        position: absolute !important;
+        top: var(--content-margin-top) !important;
+        left: var(--content-margin-left) !important;
+        right: var(--content-margin-right) !important;
+        bottom: var(--content-margin-bottom) !important;
+        width: var(--content-width) !important;
+        height: var(--content-height) !important;
+        overflow: visible !important;
+        transform: translateZ(0) !important;
+    }
+    
+    .letter-date-display {
+        position: absolute !important;
+        top: var(--date-top) !important;
+        left: var(--date-left) !important;
+        font-size: 12px !important;
+        color: var(--primary-color) !important;
+        font-weight: 600 !important;
+        z-index: 20 !important;
+        transform: translateZ(0) !important;
+        background: transparent !important;
+        page-break-inside: avoid !important;
+    }
+    
+    .student-id-display {
+        position: absolute !important;
+        top: var(--id-top) !important;
+        right: var(--id-right) !important;
+        font-size: 10px !important;
+        color: #666 !important;
+        z-index: 20 !important;
+        text-align: center !important;
+        max-width: 70mm !important;
+        transform: none !important;
+        background: transparent !important;
+        page-break-inside: avoid !important;
+    }
+    
+    /* ✅ صندوق المرفقات مرفوع في الطباعة */
+    .attachments-box {
+        position: absolute !important;
+        bottom: var(--attachments-bottom) !important; /* ✅ مرفوع 1 سم */
+        right: var(--attachments-right) !important;
+        max-width: var(--attachments-max-width) !important;
+        font-size: 10px !important;
+        color: var(--primary-color) !important;
+        border: 2px solid var(--primary-color) !important;
+        z-index: 20 !important;
+        transform: translateZ(0) !important;
+        background: transparent !important;
+        page-break-inside: avoid !important;
+    }
+    
+    .director-signature {
+        position: absolute !important;
+        top: var(--signature1-top) !important;
+        left: var(--signature1-left) !important;
+        width: var(--signature-width) !important;
+        text-align: center !important;
+        font-size: 14px !important;
+        color: var(--primary-color) !important;
+        font-weight: 600 !important;
+        z-index: 25 !important;
+        line-height: var(--line-spacing) !important;
+        background: transparent !important;
+        padding: 0 !important;
+        border: none !important;
+        margin: 0 !important;
+        transform: translateZ(0) !important;
+        page-break-inside: avoid !important;
+        overflow: visible !important;
+        white-space: nowrap !important;
+    }
+    
+    /* ✅ توقيع المدرسة الثاني مرفوع في الطباعة */
+    .signature-left {
+        position: absolute !important;
+        bottom: var(--signature2-bottom) !important; /* ✅ مرفوع 1 سم */
+        left: var(--signature2-left) !important;
+        width: var(--signature-width) !important;
+        text-align: center !important;
+        font-size: 12px !important;
+        color: var(--primary-color) !important;
+        font-weight: 600 !important;
+        z-index: 25 !important;
+        line-height: var(--line-spacing) !important;
+        background: transparent !important;
+        padding: 0 !important;
+        border: none !important;
+        margin: 0 !important;
+        transform: translateZ(0) !important;
+        page-break-inside: avoid !important;
+        overflow: visible !important;
+    }
+    
+    .stamp-first {
+        position: absolute !important;
+        top: var(--stamp1-top) !important;
+        z-index: 15 !important;
+        transform: translateZ(0) !important;
+    }
+    
+    /* ✅ ختم الجزء الثاني مرفوع في الطباعة */
+    .stamp-second {
+        position: absolute !important;
+        top: var(--stamp2-top) !important; /* ✅ مرفوع 1 سم */
+        z-index: 15 !important;
+        transform: translateZ(0) !important;
+    }
+    
+    /* ✅ الخط الفاصل - بألوان الهوية الجديدة في الطباعة */
+    .section-divider {
+        height: var(--divider-thickness) !important;
+        background: linear-gradient(90deg, var(--ministry-blue), var(--ministry-green)) !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        margin: calc(var(--section-gap) + var(--divider-offset)) 0 var(--section-gap) 0 !important;
+    }
+    
+    /* ✅ عنوان الجزء الثاني في الطباعة - الحل الجديد */
+    .section-header-special {
+        font-size: 16px !important;
+        font-weight: 800 !important;
+        color: var(--section-header-color) !important;
+        margin-top: var(--header-gap-from-divider) !important; /* ✅ مسافة مستقلة من الخط الفاصل */
+        margin-bottom: 4mm !important; /* ✅ مسافة ثابتة أصغر في الطباعة */
+        padding: 1mm 0 !important;
+        text-align: center !important;
+        line-height: 1.5 !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* ✅ محتوى الجزء الثاني في الطباعة - مُبسَّط */
+    .second-section-content {
+        margin-top: 0 !important; /* ✅ إلغاء المتغيرات المعقدة */
+        /* المسافة محكومة بـ margin-bottom للعنوان */
+    }
+    
+    .letter-content,
+    .letter-section,
+    .signature-section,
+    .attachments-box,
+    .stamp {
+        background: transparent !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    .letter-content,
+    .letter-section {
+        font-size: 14px !important;
+        line-height: var(--line-spacing) !important;
+        font-weight: 600 !important;
+        text-align: center !important;
+        color: var(--primary-color) !important;
+        margin-bottom: var(--paragraph-spacing) !important;
+    }
+    
+    .letter-content p {
+        margin-bottom: var(--paragraph-spacing) !important;
+        line-height: var(--line-spacing) !important;
+    }
+    
+    .dotted-line {
+        color: var(--border-gray) !important;
+        font-weight: 300 !important;
+    }
+    
+    /* ✅ خط التاريخ مُصغَّر في الطباعة */
+    .date-fields {
+        font-size: 9px !important; /* ✅ أصغر من 10px */
+        text-align: center !important;
+        color: var(--primary-color) !important;
+        line-height: var(--line-spacing) !important;
+        margin-top: 5mm !important; /* ✅ مسافة إضافية للتوقيع */
+    }
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header id="header">
+            <h1>نموذج خطاب قبول طالب</h1>
+            <p>أنشئ خطابات قبول ونقل الطلاب بين المدارس بسهولة وسرعة</p>
+        </header>
+
+        <div class="form-container" id="formContainer">
+            <!-- نوع المدرسة -->
+            <div class="section">
+                <h2>🏫 نوع المدرسة</h2>
+                <div class="input-group">
+                    <label>اختر نوع المدرسة:</label>
+                    <div class="gender-options">
+                        <div class="gender-option" onclick="selectGender('boys')">
+                            <input type="radio" name="schoolGender" value="boys" id="boys">
+                            <label for="boys">مدرسة بنين</label>
+                        </div>
+                        <div class="gender-option" onclick="selectGender('girls')">
+                            <input type="radio" name="schoolGender" value="girls" id="girls">
+                            <label for="girls">مدرسة بنات</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- معلومات المدرسة الحالية مع زر مسح البيانات -->
+            <div class="section">
+                <h2>🏫 معلومات المدرسة الحالية</h2>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="currentSchool" id="currentSchoolLabel">اسم المدرسة الحالية والمرحلة:</label>
+                        <input type="text" id="currentSchool" placeholder="مثال: مدرسة الأمل الابتدائية">
+                    </div>
+                    <div class="input-group">
+                        <label for="currentDirector" id="currentDirectorLabel">اسم مدير المدرسة الحالية:</label>
+                        <input type="text" id="currentDirector" placeholder="مثال: أحمد محمد السعيد">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="letterDate">تاريخ الخطاب:</label>
+                        <input type="date" id="letterDate">
+                    </div>
+                    <div class="input-group">
+                        <label>&nbsp;</label>
+                        <button type="button" onclick="clearSavedSchoolData()" class="clear-data-btn">
+                            🗑️ مسح البيانات المحفوظة
+                        </button>
+                        <div style="font-size:12px; color:#666; margin-top:5px;">
+                            💾 يتم حفظ بيانات المدرسة تلقائياً لسهولة الاستخدام
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- معلومات الطالب والمدرسة المنقول منها -->
+            <div class="section">
+                <h2>👨‍🎓 معلومات الطالب والمدرسة المنقول منها</h2>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="fromSchool">اسم المدرسة المنقول منها:</label>
+                        <input type="text" id="fromSchool" placeholder="مثال: مدرسة النور الابتدائية">
+                    </div>
+                    <div class="input-group">
+                        <label for="educationLevel">المرحلة التعليمية:</label>
+                        <select id="educationLevel">
+                            <option value="">اختر المرحلة</option>
+                            <option value="طفولة مبكرة">طفولة مبكرة</option>
+                            <option value="الابتدائية">الابتدائية</option>
+                            <option value="المتوسطة">المتوسطة</option>
+                            <option value="الثانوية">الثانوية</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="studentName" id="studentNameLabel">اسم الطالب:</label>
+                        <input type="text" id="studentName" placeholder="مثال: محمد أحمد العلي">
+                    </div>
+                    <div class="input-group">
+                        <label for="studentNationality">جنسية الطالب:</label>
+                        <input type="text" id="studentNationality" placeholder="مثال: سعودي">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="studentGrade">الصف الدراسي:</label>
+                        <select id="studentGrade">
+                            <option value="">اختر الصف</option>
+                            <option value="الأول">الأول</option>
+                            <option value="الثاني">الثاني</option>
+                            <option value="الثالث">الثالث</option>
+                            <option value="الرابع">الرابع</option>
+                            <option value="الخامس">الخامس</option>
+                            <option value="السادس">السادس</option>
+                            <option value="الأول متوسط">الأول متوسط</option>
+                            <option value="الثاني متوسط">الثاني متوسط</option>
+                            <option value="الثالث متوسط">الثالث متوسط</option>
+                            <option value="الأول ثانوي">الأول ثانوي</option>
+                            <option value="الثاني ثانوي">الثاني ثانوي</option>
+                            <option value="الثالث ثانوي">الثالث ثانوي</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="studentId">رقم الهوية/الإقامة (اختياري):</label>
+                        <input type="text" id="studentId" placeholder="مثال: 1234567890" inputmode="numeric" pattern="[0-9]*">
+                        <div class="id-hint">
+                            💡 إضافة رقم الهوية/الإقامة يساعد في سرعة إتمام الإجراءات في نظام نور/منصة مدرستي
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- طلبات التحويل (الجزء الأول) -->
+            <div class="section">
+                <h2>📋 طلبات التحويل (الجزء الأول)</h2>
+                <div class="input-group">
+                    <label>المطلوب من المدرسة المنقول منها:</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item checked" onclick="toggleCheckbox('fullCurriculum')">
+                            <input type="checkbox" id="fullCurriculum" checked>
+                            <label for="fullCurriculum">كامل المقررات الدراسية</label>
+                        </div>
+                        <div class="checkbox-item checked" onclick="toggleCheckbox('noorTransfer')">
+                            <input type="checkbox" id="noorTransfer" checked>
+                            <label for="noorTransfer">تحويله في برنامج نور</label>
+                        </div>
+                        <div class="checkbox-item checked" onclick="toggleCheckbox('madrasatiDisable')">
+                            <input type="checkbox" id="madrasatiDisable" checked>
+                            <label for="madrasatiDisable">تعطيله في منصة مدرستي</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المرفقات والإجراءات (الجزء الثاني) -->
+            <div class="section">
+                <h2>📎 المرفقات والإجراءات (الجزء الثاني)</h2>
+                <div class="input-group">
+                    <label>المرفقات المطلوبة:</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item checked" onclick="toggleCheckbox('fullFile')">
+                            <input type="checkbox" id="fullFile" checked>
+                            <label for="fullFile">الملف كاملاً</label>
+                        </div>
+                        <div class="checkbox-item checked" onclick="toggleCheckbox('noorSystem')">
+                            <input type="checkbox" id="noorSystem" checked>
+                            <label for="noorSystem">التحويل في نظام نور</label>
+                        </div>
+                        <div class="checkbox-item checked" onclick="toggleCheckbox('madrasatiSystem')">
+                            <input type="checkbox" id="madrasatiSystem" checked>
+                            <label for="madrasatiSystem">التعطيل في منصة مدرستي</label>
+                        </div>
+                        <div class="checkbox-item checked" onclick="toggleCheckbox('semesterBooks')">
+                            <input type="checkbox" id="semesterBooks" checked>
+                            <label for="semesterBooks">تسليم مقررات الفصل الدراسي</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- زر الإنشاء -->
+            <div class="action-section">
+                <button id="previewBtn" class="preview-btn action-btn">👁️ معاينة الخطاب</button>
+                <button id="resetBtn" class="reset-btn action-btn">🔄 إعادة تعيين</button>
+            </div>
+
+            <!-- تنبيه الحفظ -->
+            <div class="warning-message">
+                <strong>تنبيه:</strong> يرجى حفظ الخطاب أو طباعته قبل إنشاء خطاب جديد، حيث سيتم حذف البيانات المدخلة عند إعادة التعيين.
+            </div>
+        </div>
+
+        <!-- معاينة الخطاب -->
+        <div class="preview-container" id="previewContainer" style="display: none;">
+            <div class="action-buttons">
+                <h2>📄 معاينة خطاب قبول الطالب</h2>
+                <button class="print-btn" onclick="printDocument()">🖨️ طباعة</button>
+                <button class="new-document-btn" onclick="createNewDocument()">📝 خطاب جديد</button>
+            </div>
+            
+            <!-- ملاحظة حفظ PDF -->
+            <div class="pdf-note">
+                <span class="icon">💡</span>
+                <strong>تلميح:</strong> لحفظ الملف بصيغة PDF، اضغط على زر الطباعة واختر "حفظ كملف PDF" أو "Microsoft Print to PDF" من خيارات الطابعة
+            </div>
+            
+            <div class="pdf-preview">
+                <div id="pdfContent" class="pdf-content">
+                    <div class="official-template">
+                        <div class="letter-header-area">
+                            <!-- سيتم تعبئة العنوان ديناميكياً -->
+                        </div>
+                        
+                        <div class="document-content" id="docArea">
+                            <!-- سيتم إنشاء المحتوى هنا -->
+                        </div>
+                        
+                        <!-- العناصر المطلقة الثابتة -->
+                        <div class="letter-date-display" id="dateDisplay"></div>
+                        <div class="student-id-display" id="idDisplay"></div>
+                        <div class="attachments-box" id="attachmentsBox"></div>
+                        <div class="director-signature" id="signature1"></div>
+                        <div class="signature-left" id="signature2"></div>
+                        
+                        <!-- كلمة "ختم" -->
+                        <div class="stamp stamp-first">الختم</div>
+                        <div class="stamp stamp-second">الختم</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer" id="footer">
+            <p><strong>جميع الحقوق محفوظة - متجر عروق الذهب للمنتجات الرقمية</strong></p>
+            <p>©GoldenVeinsHQ 2025 - الإصدار النهائي 2.1</p>
+            <p>للتواصل: <a href="https://goldenveinshq.carrd.co/" target="_blank">goldenveinshq.carrd.co</a></p>
+        </div>
+    </div>
+
+    <script>
+        let currentGender = 'boys';
+
+        // دوال الحفظ والاسترداد
+        function saveSchoolData() {
+            const schoolData = {
+                currentSchool: document.getElementById('currentSchool').value,
+                currentDirector: document.getElementById('currentDirector').value
+            };
+            localStorage.setItem('schoolData_GoldenVeins', JSON.stringify(schoolData));
+        }
+
+        function loadSchoolData() {
+            const savedData = localStorage.getItem('schoolData_GoldenVeins');
+            if (savedData) {
+                try {
+                    const schoolData = JSON.parse(savedData);
+                    document.getElementById('currentSchool').value = schoolData.currentSchool || '';
+                    document.getElementById('currentDirector').value = schoolData.currentDirector || '';
+                } catch (error) {
+                    console.log('خطأ في استرداد البيانات المحفوظة');
+                }
+            }
+        }
+
+        function clearSavedSchoolData() {
+            if (confirm('هل تريد حذف بيانات المدرسة المحفوظة؟\nسيتم حذف اسم المدرسة واسم المدير المحفوظين.')) {
+                localStorage.removeItem('schoolData_GoldenVeins');
+                document.getElementById('currentSchool').value = '';
+                document.getElementById('currentDirector').value = '';
+                alert('✅ تم حذف البيانات المحفوظة بنجاح');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('letterDate').value = today;
+            
+            document.getElementById('boys').checked = true;
+            document.querySelector('.gender-option').classList.add('selected');
+            updateGenderTexts('boys');
+            
+            loadSchoolData();
+            
+            document.getElementById('previewBtn').addEventListener('click', showPreview);
+            document.getElementById('resetBtn').addEventListener('click', resetForm);
+            
+            document.getElementById('currentSchool').addEventListener('input', saveSchoolData);
+            document.getElementById('currentDirector').addEventListener('input', saveSchoolData);
+            
+            const studentIdField = document.getElementById('studentId');
+            studentIdField.addEventListener('input', e => e.target.value = e.target.value.replace(/[^0-9]/g, ''));
+            
+            studentIdField.addEventListener('keypress', function(e) {
+                if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter'].includes(e.key)) {
+                    e.preventDefault();
+                }
+            });
+
+            document.querySelector('header h1').addEventListener('dblclick', quickFillData);
+        });
+
+        function selectGender(gender) {
+            currentGender = gender;
+            
+            document.querySelectorAll('.gender-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelector(`[onclick="selectGender('${gender}')"]`).classList.add('selected');
+            document.getElementById(gender).checked = true;
+            
+            updateGenderTexts(gender);
+        }
+
+        function updateGenderTexts(gender) {
+            const labels = {
+                currentSchoolLabel: 'اسم المدرسة الحالية والمرحلة:',
+                studentNameLabel: gender === 'girls' ? 'اسم الطالبة:' : 'اسم الطالب:',
+                currentDirectorLabel: gender === 'girls' ? 'اسم مديرة المدرسة الحالية:' : 'اسم مدير المدرسة الحالية:'
+            };
+            
+            const placeholders = {
+                currentDirector: gender === 'girls' ? 'مثال: فاطمة أحمد السعيد' : 'مثال: أحمد محمد السعيد',
+                studentName: gender === 'girls' ? 'مثال: فاطمة أحمد العلي' : 'مثال: محمد أحمد العلي'
+            };
+            
+            Object.keys(labels).forEach(id => {
+                document.getElementById(id).textContent = labels[id];
+            });
+            
+            Object.keys(placeholders).forEach(id => {
+                document.getElementById(id).placeholder = placeholders[id];
+            });
+        }
+
+        function toggleCheckbox(checkboxId) {
+            const checkbox = document.getElementById(checkboxId);
+            const item = checkbox.closest('.checkbox-item');
+            
+            checkbox.checked = !checkbox.checked;
+            item.classList.toggle('checked', checkbox.checked);
+        }
+
+        function showPreview() {
+            const requiredFields = [
+                'currentSchool', 'currentDirector', 'letterDate',
+                'fromSchool', 'educationLevel', 'studentName',
+                'studentNationality', 'studentGrade'
+            ];
+            
+            let isValid = true;
+            let firstEmptyField = null;
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#e74c3c';
+                    isValid = false;
+                    if (!firstEmptyField) firstEmptyField = field;
+                } else {
+                    field.style.borderColor = '#28a745';
+                }
+            });
+            
+            const studentId = document.getElementById('studentId');
+            if (studentId.value && !/^[0-9]+$/.test(studentId.value)) {
+                studentId.style.borderColor = '#e74c3c';
+                alert('رقم الهوية/الإقامة يجب أن يحتوي على أرقام فقط');
+                studentId.focus();
+                return;
+            }
+            
+            if (!isValid) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                if (firstEmptyField) firstEmptyField.focus();
+                return;
+            }
+            
+            fillPreviewAreas();
+            
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('previewContainer').style.display = 'block';
+            document.getElementById('previewContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function fillPreviewAreas() {
+            const data = {
+                currentSchool: document.getElementById('currentSchool').value,
+                currentDirector: document.getElementById('currentDirector').value,
+                letterDate: document.getElementById('letterDate').value,
+                fromSchool: document.getElementById('fromSchool').value,
+                educationLevel: document.getElementById('educationLevel').value,
+                studentName: document.getElementById('studentName').value,
+                studentNationality: document.getElementById('studentNationality').value,
+                studentGrade: document.getElementById('studentGrade').value,
+                studentId: document.getElementById('studentId').value,
+                fullCurriculum: document.getElementById('fullCurriculum').checked,
+                noorTransfer: document.getElementById('noorTransfer').checked,
+                madrasatiDisable: document.getElementById('madrasatiDisable').checked,
+                fullFile: document.getElementById('fullFile').checked,
+                noorSystem: document.getElementById('noorSystem').checked,
+                madrasatiSystem: document.getElementById('madrasatiSystem').checked,
+                semesterBooks: document.getElementById('semesterBooks').checked
+            };
+
+            const genderTexts = {
+                studentLabel: currentGender === 'girls' ? 'الطالبة' : 'الطالب',
+                studentLabelNoAl: currentGender === 'girls' ? 'طالبة' : 'طالب',
+                directorTitle: currentGender === 'girls' ? 'مديرة مدرسة' : 'مدير مدرسة',
+                respectTitle: currentGender === 'girls' ? 'المكرمة' : 'المكرم',
+                respectSuffix: currentGender === 'girls' ? 'المحترمة' : 'المحترم',
+                pronounHer: currentGender === 'girls' ? 'ها' : 'ه',
+                pronounShe: currentGender === 'girls' ? 'ة' : ''
+            };
+
+            document.querySelector('.letter-header-area').textContent = `خطاب قبول ونقل ${genderTexts.studentLabelNoAl}`;
+            
+            document.getElementById('dateDisplay').innerHTML = `التاريخ: ${convertToHijri(data.letterDate)}`;
+            
+            const idDisplay = document.getElementById('idDisplay');
+            if (data.studentId) {
+                idDisplay.innerHTML = `
+                    <div style="text-align:center;">
+                        <strong>رقم الهوية/الإقامة: ${data.studentId}</strong><br>
+                        <span style="font-size:10px;color:#888;">يساعد في سرعة الإجراءات</span>
+                    </div>`;
+                idDisplay.style.display = 'block';
+            } else {
+                idDisplay.style.display = 'none';
+            }
+            
+            const attachments = [];
+            if (data.fullFile) attachments.push('☐ الملف كاملاً');
+            if (data.noorSystem) attachments.push('☐ التحويل في نظام نور');
+            if (data.madrasatiSystem) attachments.push('☐ التعطيل في منصة مدرستي');
+            if (data.semesterBooks) attachments.push('☐ تسليم مقررات الفصل');
+            
+            const attachmentsBox = document.getElementById('attachmentsBox');
+            if (attachments.length > 0) {
+                attachmentsBox.innerHTML = `<strong>المرفقات / الإجراءات:</strong><br>${attachments.join('<br>')}`;
+                attachmentsBox.style.display = 'block';
+            } else {
+                attachmentsBox.style.display = 'none';
+            }
+            
+            document.getElementById('signature1').innerHTML = `
+                <div style="text-align:center;line-height:1.6;">
+                    <p style="margin-bottom:2mm;"><strong>${genderTexts.directorTitle}</strong></p>
+                    <p><strong>${data.currentDirector}</strong></p>
+                </div>`;
+            
+            // ✅ تحسين التوقيع الثاني النهائي - مع الخط المنقط الأطول والمسافة الإضافية
+            document.getElementById('signature2').innerHTML = `
+                <div style="text-align:center;line-height:1.8;">
+                    <p style="margin-bottom:2mm;"><strong>${genderTexts.directorTitle}: ${data.fromSchool}</strong></p>
+                    <p style="margin-bottom:4mm;"><span class="dotted-line">................................................................................</span></p>
+                    <div class="date-fields">
+                        ( <span class="dotted-line">....</span> / <span class="dotted-line">....</span> / 1447هـ )
+                    </div>
+                </div>`;
+
+            const requirements = [];
+            if (data.fullCurriculum) requirements.push('كامل المقررات الدراسية');
+            if (data.noorTransfer) requirements.push(`تحويل${genderTexts.pronounHer} في برنامج نور`);
+            if (data.madrasatiDisable) requirements.push(`تعطيل${genderTexts.pronounHer} في منصة مدرستي`);
+            
+            const requirementsText = requirements.length > 0 ? 
+                `بما فيه [${requirements.join('، ')}]` : 
+                'بما فيه جميع المتطلبات';
+
+            // ✅ المحتوى النهائي مع الحل الجديد للعنوان
+            document.getElementById('docArea').innerHTML = `
+                <div class="first-section letter-content">
+                    <p><strong>${genderTexts.respectTitle} ${genderTexts.directorTitle}/ ${data.fromSchool} ${data.educationLevel} ${genderTexts.respectSuffix}</strong></p>
+                    
+                    <p><strong>السلام عليكم ورحمة الله وبركاته &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; وبعد:</strong></p>
+                    
+                    <p>نظراً لرغبة ولي أمر ${genderTexts.studentLabel}/ <strong>${data.studentName}</strong>، الجنسية: <strong>${data.studentNationality}</strong>، بالصف: <strong>${data.studentGrade}</strong></p>
+                    
+                    <p>بنقل${genderTexts.pronounHer} من مدرستكم إلى مدرستنا، ولوجود متسع ل${genderTexts.pronounHer} بالمدرسة، نأمل التكرم بتحويل ملف${genderTexts.pronounHer} بالطريقة المتبعة</p>
+                    
+                    <p>${requirementsText}</p>
+                    
+                    <p><strong>شاكرين حسن تعاونكم،،</strong></p>
+                    
+                    <p><strong>والله الموفق،،</strong></p>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="letter-content">
+                    <p class="section-header-special">
+                        (يعبأ من قبل المدرسة المنقول منها ${genderTexts.studentLabelNoAl})
+                    </p>
+                    
+                    <div class="second-section-content">
+                        <p><strong>مع التحية ل${genderTexts.directorTitle}/ ${data.currentSchool} ${genderTexts.respectSuffix}</strong></p>
+                        
+                        <p><strong>السلام عليكم ورحمة الله وبركاته &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; وبعد:</strong></p>
+                        
+                        <p>بناءً على موافقتكم قبول ${genderTexts.studentLabel} المذكور${genderTexts.pronounShe} أعلاه بمدرستكم وطلبكم،</p>
+                        
+                        <p>تجدون برفقه المطلوب لإكمال اللازم...</p>
+                        
+                        <p><strong>ودمتم،،،</strong></p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createNewDocument() {
+            document.getElementById('previewContainer').style.display = 'none';
+            document.getElementById('formContainer').style.display = 'block';
+            document.getElementById('formContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetForm() {
+            if (!confirm('هل تريد إعادة تعيين جميع البيانات؟\n\nملاحظة: بيانات المدرسة المحفوظة لن تتأثر.')) return;
+            
+            document.querySelectorAll('input[type="text"]:not(#currentSchool):not(#currentDirector), input[type="date"], select').forEach(field => {
+                field.value = '';
+                field.style.borderColor = '#d4af37';
+            });
+            
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+                checkbox.closest('.checkbox-item').classList.add('checked');
+            });
+            
+            document.getElementById('letterDate').value = new Date().toISOString().split('T')[0];
+            selectGender('boys');
+            
+            document.getElementById('previewContainer').style.display = 'none';
+            document.getElementById('formContainer').style.display = 'block';
+        }
+
+        function printDocument() {
+            if (!document.getElementById('pdfContent').innerHTML) {
+                alert('يرجى إنشاء المعاينة أولاً');
+                return;
+            }
+
+            const studentName = document.getElementById('studentName').value;
+            const currentSchool = document.getElementById('currentSchool').value;
+            const letterDate = document.getElementById('letterDate').value;
+            const studentLabel = currentGender === 'girls' ? 'طالبة' : 'طالب';
+            const fileName = `خطاب_قبول_${studentLabel}_${studentName}_${currentSchool}_${letterDate}`;
+
+            const originalTitle = document.title;
+            document.title = fileName;
+
+            const elementsToStabilize = [
+                document.getElementById('signature1'),
+                document.getElementById('signature2'),
+                document.getElementById('dateDisplay'),
+                document.getElementById('idDisplay'),
+                document.getElementById('attachmentsBox')
+            ];
+
+            elementsToStabilize.forEach(element => {
+                if (element) {
+                    element.style.transform = 'translateZ(0)';
+                    element.style.backfaceVisibility = 'hidden';
+                    element.style.willChange = 'auto';
+                }
+            });
+
+            const elementsToHide = [
+                document.getElementById('header'),
+                document.getElementById('formContainer'),
+                document.getElementById('footer'),
+                document.querySelector('.action-buttons'),
+                document.querySelector('.pdf-note')
+            ];
+
+            elementsToHide.forEach(element => {
+                if (element) element.style.display = 'none';
+            });
+
+            setTimeout(() => {
+                window.print();
+                
+                setTimeout(() => {
+                    document.title = originalTitle;
+                    
+                    elementsToHide.forEach(element => {
+                        if (element) element.style.display = '';
+                    });
+                    
+                    elementsToStabilize.forEach(element => {
+                        if (element) {
+                            element.style.transform = '';
+                            element.style.backfaceVisibility = '';
+                            element.style.willChange = '';
+                        }
+                    });
+                }, 1500);
+            }, 200);
+        }
+
+        function convertToHijri(gregorianDate) {
+            if (!gregorianDate) return "";
+            
+            const date = new Date(gregorianDate);
+            const day = date.getDate();
+            const month = date.getMonth();
+            const year = date.getFullYear() - 579;
+            
+            const hijriMonths = [
+                "محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة",
+                "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"
+            ];
+            
+            return `${day}/${hijriMonths[month]}/${year}هـ`;
+        }
+
+        function quickFillData() {
+            if (confirm('ملء البيانات تلقائياً للاختبار؟')) {
+                document.getElementById('currentSchool').value = 'مدرسة الأمل الابتدائية';
+                document.getElementById('currentDirector').value = 'أحمد محمد السعيد';
+                document.getElementById('fromSchool').value = 'مدرسة النور الابتدائية';
+                document.getElementById('educationLevel').value = 'الابتدائية';
+                document.getElementById('studentName').value = 'محمد أحمد العلي';
+                document.getElementById('studentNationality').value = 'سعودي';
+                document.getElementById('studentGrade').value = 'ثالث';
+                document.getElementById('studentId').value = '1234567890';
+                saveSchoolData();
+            }
+        }
+    </script>
+</body>
+</html>
