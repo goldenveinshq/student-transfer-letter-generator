@@ -1035,6 +1035,110 @@ header p {
         margin-top: 5mm !important; /* ✅ مسافة إضافية للتوقيع */
     }
 }
+/* سياسة الخصوصية - رابط بسيط */
+.privacy-link {
+    color: var(--accent-color) !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.privacy-link:hover {
+    color: var(--white) !important;
+    text-decoration: underline !important;
+}
+
+/* النافذة المنبثقة */
+.privacy-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.privacy-modal-content {
+    background: var(--white);
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.privacy-modal-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--white);
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.privacy-modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.privacy-close {
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--white);
+    transition: all 0.3s;
+}
+
+.privacy-close:hover {
+    transform: scale(1.2);
+    color: var(--accent-color);
+}
+
+.privacy-modal-body {
+    padding: 25px;
+    line-height: 1.8;
+    color: var(--text-color);
+    text-align: right;
+}
+
+.privacy-modal-body h3 {
+    color: var(--primary-color);
+    margin: 20px 0 10px 0;
+    font-size: 18px;
+}
+
+.privacy-modal-body ul {
+    margin: 10px 0;
+    padding-right: 20px;
+}
+
+.privacy-modal-body li {
+    margin: 8px 0;
+}
+
+.privacy-update {
+    margin-top: 15px;
+    font-style: italic;
+    color: #666;
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .privacy-modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .privacy-modal-header h2 {
+        font-size: 16px;
+    }
+}
     </style>
 </head>
 
@@ -1254,11 +1358,58 @@ header p {
 
         <!-- Footer -->
         <div class="footer" id="footer">
-            <p><strong>جميع الحقوق محفوظة - متجر عروق الذهب للمنتجات الرقمية</strong></p>
-            <p>©GoldenVeinsHQ 2025 - الإصدار 2.1</p>
-            <p>للتواصل: <a href="https://goldenveinshq.carrd.co/" target="_blank">goldenveinshq.carrd.co</a></p>
+    <p><strong>جميع الحقوق محفوظة - متجر عروق الذهب للمنتجات الرقمية</strong></p>
+    <p>©GoldenVeinsHQ 2025 - الإصدار 2.1</p>
+    <p>
+        <a href="#" onclick="togglePrivacyPolicy()" class="privacy-link">🔒 سياسة الخصوصية</a> | 
+        للتواصل: <a href="https://goldenveinshq.carrd.co/" target="_blank">goldenveinshq.carrd.co</a>
+    </p>
+</div>
+
+<!-- نافذة سياسة الخصوصية المنبثقة -->
+<div id="privacyModal" class="privacy-modal" style="display: none;">
+    <div class="privacy-modal-content">
+        <div class="privacy-modal-header">
+            <h2>🔒 سياسة الخصوصية - نموذج خطابات قبول الطلاب</h2>
+            <span class="privacy-close" onclick="togglePrivacyPolicy()">&times;</span>
+        </div>
+        <div class="privacy-modal-body">
+            <h3>📊 جمع واستخدام البيانات</h3>
+            <p>نموذج خطابات قبول الطلاب مصمم ليعمل بالكامل في متصفحك بدون إرسال أي بيانات لخوادم خارجية.</p>
+            
+            <h3>🔐 أنواع البيانات المتعامل معها</h3>
+            <ul>
+                <li><strong>بيانات المدرسة:</strong> اسم المدرسة ومديرها (تُحفظ محلياً لسهولة الاستخدام)</li>
+                <li><strong>بيانات الطالب:</strong> الاسم، الجنسية، الصف، رقم الهوية (اختياري)</li>
+                <li><strong>إعدادات النموذج:</strong> نوع المدرسة والمرفقات المحددة</li>
+            </ul>
+            
+            <h3>💾 تخزين البيانات</h3>
+            <ul>
+                <li>جميع البيانات تُحفظ في <strong>localStorage</strong> الخاص بمتصفحك</li>
+                <li>لا نرسل أو نحفظ أي بيانات على خوادمنا</li>
+                <li>يمكنك مسح البيانات المحفوظة في أي وقت</li>
+            </ul>
+            
+            <h3>🌐 مشاركة البيانات</h3>
+            <p><strong>لا نشارك أو نبيع أو ننقل أي بيانات لأطراف ثالثة.</strong> النموذج يعمل بالكامل في جهازك.</p>
+            
+            <h3>🛡️ أمان البيانات</h3>
+            <ul>
+                <li>استخدام HTTPS لحماية الاتصال</li>
+                   <li>عدم استخدام ملفات تعريف الارتباط للتتبع</li>
+            </ul>
+            
+            <h3>⚖️ المسؤولية القانونية</h3>
+            <p>هذا النموذج أداة مساعدة لإنشاء خطابات القبول. المستخدم مسؤول عن دقة البيانات المدخلة والتأكد من مطابقتها للوائح والتعليمات الوزارية، واستخدامها وفق الادلة التنظيمية في هذا الشأن.</p>
+            
+            <h3>📞 التواصل</h3>
+            <p>لأي استفسارات حول سياسة الخصوصية: <a href="https://goldenveinshq.carrd.co/" target="_blank">goldenveinshq.carrd.co</a></p>
+            
+            <p class="privacy-update"><strong>📅 آخر تحديث:</strong> يناير 2025</p>
         </div>
     </div>
+</div>
 
     <script>
         let currentGender = 'boys';
@@ -1650,6 +1801,36 @@ header p {
                 saveSchoolData();
             }
         }
+// سياسة الخصوصية - إضافة جديدة
+function togglePrivacyPolicy() {
+    const modal = document.getElementById('privacyModal');
+    const isVisible = modal.style.display !== 'none';
+    
+    if (isVisible) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    } else {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // إغلاق النافذة بالنقر خارجها
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                togglePrivacyPolicy();
+            }
+        };
+    }
+}
+
+// إغلاق النافذة بمفتاح Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modal = document.getElementById('privacyModal');
+        if (modal.style.display === 'block') {
+            togglePrivacyPolicy();
+        }
+    }
+});
     </script>
 </body>
 </html>
