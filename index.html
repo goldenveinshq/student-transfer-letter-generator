@@ -1,5 +1,451 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+<!-- 🔒 نظام الحماية الصامت وانتهاء الصلاحية - Golden Veins HQ -->
+<script>
+(function() {
+    'use strict';
+    
+    // 🎯 إعدادات النظام
+    const SYSTEM_CONFIG = {
+        expiryDate: '2026-06-26', // تنسيق: YYYY-MM-DD
+        warningDays: 30,
+        debugMode: false, // للاختبار فقط
+        silentProtection: true, // الحماية الصامتة
+        subtleEffects: true // التأثيرات الخفيفة
+    };
+    
+    // 📅 معالج التاريخ المحسن
+    function parseExpiryDate() {
+        try {
+            const [year, month, day] = SYSTEM_CONFIG.expiryDate.split('-');
+            const expiryDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 23, 59, 59);
+            
+            if (SYSTEM_CONFIG.debugMode) {
+                console.log('تاريخ الانتهاء المحدد:', expiryDate.toLocaleString('ar-SA'));
+            }
+            
+            return expiryDate;
+        } catch (error) {
+            console.error('خطأ في تحليل التاريخ:', error);
+            return new Date(2026, 5, 26, 23, 59, 59);
+        }
+    }
+    
+    // 🕐 الحصول على التاريخ والوقت الحالي
+    function getCurrentDate() {
+        return new Date();
+    }
+    
+    // 📊 حساب الأيام المتبقية
+    function calculateDaysRemaining(expiryDate, currentDate) {
+        const timeDiff = expiryDate.getTime() - currentDate.getTime();
+        const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        
+        if (SYSTEM_CONFIG.debugMode) {
+            console.log('الأيام المتبقية:', daysDiff);
+        }
+        
+        return daysDiff;
+    }
+    
+    // 🎬 تشغيل النظام الرئيسي
+    function initializeSystem() {
+        try {
+            const expiryDate = parseExpiryDate();
+            const currentDate = getCurrentDate();
+            const daysRemaining = calculateDaysRemaining(expiryDate, currentDate);
+            
+            // 🔍 التحقق من انتهاء الصلاحية
+            if (currentDate > expiryDate || daysRemaining < 0) {
+                if (SYSTEM_CONFIG.debugMode) {
+                    console.log('🔚 النظام منتهي الصلاحية - عرض صفحة الانتهاء');
+                }
+                showExpiryPage();
+                return;
+            }
+            
+            // ⚠️ التحقق من قرب انتهاء الصلاحية
+            if (daysRemaining <= SYSTEM_CONFIG.warningDays && daysRemaining > 0) {
+                if (SYSTEM_CONFIG.debugMode) {
+                    console.log('⚠️ قرب انتهاء الصلاحية - عرض التحذير');
+                }
+                showExpiryWarning(daysRemaining);
+            }
+            
+            // 🔒 تفعيل نظام الحماية الصامت
+            if (SYSTEM_CONFIG.debugMode) {
+                console.log('🔒 تفعيل نظام الحماية الصامت');
+            }
+            initSilentProtection();
+            
+        } catch (error) {
+            console.error('خطأ في تشغيل النظام:', error);
+            initSilentProtection();
+        }
+    }
+    
+    // 📄 عرض صفحة انتهاء الصلاحية (نفس السابق)
+    function showExpiryPage() {
+        document.removeEventListener('DOMContentLoaded', initializeSystem);
+        
+        document.body.innerHTML = `
+            <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+                <div style="background: white; border-radius: 20px; padding: 40px; max-width: 650px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.15); animation: fadeIn 0.8s ease-out;">
+                    
+                    <div style="font-size: 4rem; margin-bottom: 25px; animation: pulse 2s infinite;">⏰</div>
+                    
+                    <h1 style="color: #e74c3c; margin-bottom: 20px; font-size: 2.2rem; font-weight: 700;">انتهت صلاحية النموذج</h1>
+                    
+                    <p style="color: #666; font-size: 1.3rem; margin-bottom: 35px; line-height: 1.6;">
+                        انتهت صلاحية هذا النموذج في <strong style="color: #e74c3c;">26 يونيو 2026</strong><br>
+                        للحصول على نسخة مفعلة، تواصل معنا
+                    </p>
+                    
+                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 20px; border-radius: 10px; margin: 30px 0;">
+                        <h4 style="color: #856404; margin-bottom: 10px;">📋 معلومات مهمة:</h4>
+                        <p style="color: #856404; margin: 0; font-size: 1rem;">
+                            • تم إيقاف النموذج تلقائياً لانتهاء فترة الترخيص (عام دراسي كامل)<br>
+                            • النسخة الجديدة قد تحتوي على مزايا وتحسينات إضافية<br>
+                            • التجديد متاع عبر قنوات التواصل أدناه
+                        </p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 30px; border-radius: 15px; margin: 35px 0; border: 1px solid #dee2e6;">
+                        <h3 style="color: #2c3e50; margin-bottom: 18px; font-size: 1.4rem;">🔄 للتجديد :</h3>
+                        <p style="color: #666; margin-bottom: 25px; font-size: 1.1rem;">اختر طريقة التواصل المناسبة لك</p>
+                        
+                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                            <button onclick="window.open('https://wa.me/9660544895046', '_blank')" 
+                                    style="background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); color: white; padding: 15px 25px; border: none; border-radius: 50px; font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); font-weight: 600;"
+                                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(37, 211, 102, 0.4)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(37, 211, 102, 0.3)'">
+                                <span style="font-size: 18px;">📱</span> واتساب أعمال
+                            </button>
+                            
+                            <button onclick="window.open('https://goldenveinshq.carrd.co/', '_blank')" 
+                                    style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 15px 25px; border: none; border-radius: 50px; font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3); font-weight: 600;"
+                                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(52, 152, 219, 0.4)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(52, 152, 219, 0.3)'">
+                                <span style="font-size: 18px;"></span> وسائل التواصل للمتجر
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 35px; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white;">
+                        <h4 style="margin-bottom: 12px; font-size: 1.3rem; font-weight: 700;"> Golden Veins HQ</h4>
+                        <p style="margin: 0; opacity: 0.95; font-size: 1.1rem;">نماذج وحلول احترافية للمؤسسات التعليمية</p>
+                        <p style="margin: 8px 0 0 0; opacity: 0.8; font-size: 0.9rem;">© ${new Date().getFullYear()} جميع الحقوق محفوظة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <style>
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(30px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                }
+                
+                @media (max-width: 768px) {
+                    div[style*="max-width: 650px"] {
+                        margin: 10px !important;
+                        padding: 25px !important;
+                    }
+                    
+                    h1 {
+                        font-size: 1.8rem !important;
+                    }
+                    
+                    div[style*="display: flex"] {
+                        flex-direction: column !important;
+                        align-items: center !important;
+                    }
+                    
+                    button {
+                        width: 200px !important;
+                        justify-content: center !important;
+                    }
+                }
+            </style>
+        `;
+        
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+    }
+    
+    // ⚠️ عرض تحذير انتهاء الصلاحية (يبقى كما هو - مهم للعميل)
+    function showExpiryWarning(days) {
+        const warningDiv = document.createElement('div');
+        warningDiv.id = 'expiry-warning-system';
+        warningDiv.innerHTML = `
+            <div style="position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; padding: 18px; text-align: center; z-index: 99999; font-family: 'Segoe UI', Arial, sans-serif; box-shadow: 0 4px 20px rgba(243, 156, 18, 0.4); animation: slideDownWarning 0.6s ease-out;">
+                <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <strong style="font-size: 1.1rem;">⚠️ تنبيه مهم:</strong> 
+                        <span style="font-size: 1rem;">ستنتهي صلاحية هذا النموذج خلال <strong>${days}</strong> ${days === 1 ? 'يوم' : 'أيام'} (26/6/2026)</span>
+                        <span style="opacity: 0.9; margin-right: 15px;">| للتجديد تواصل معنا </span>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button id="hide-warning-btn" 
+                                style="background: rgba(255,255,255,0.25); color: white; border: 1px solid rgba(255,255,255,0.4); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.3s; font-weight: 500;"
+                                onmouseover="this.style.background='rgba(255,255,255,0.35)'"
+                                onmouseout="this.style.background='rgba(255,255,255,0.25)'">
+                            إخفاء مؤقتاً
+                        </button>
+                        <button onclick="window.open('https://wa.me/9660544895046', '_blank')" 
+                                style="background: #25d366; color: white; border: none; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.3s; box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);"
+                                onmouseover="this.style.background='#128c7e'; this.style.transform='translateY(-1px)'"
+                                onmouseout="this.style.background='#25d366'; this.style.transform='translateY(0)'">
+                            📱 للتجديد
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <style>
+                @keyframes slideDownWarning {
+                    from { transform: translateY(-100%); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                
+                @media (max-width: 768px) {
+                    #expiry-warning-system div[style*="display: flex"] {
+                        flex-direction: column !important;
+                        text-align: center !important;
+                        gap: 15px !important;
+                    }
+                    
+                    #expiry-warning-system div[style*="flex: 1"] {
+                        min-width: auto !important;
+                    }
+                }
+            </style>
+        `;
+        
+        document.body.insertBefore(warningDiv, document.body.firstChild);
+        document.body.style.paddingTop = '90px';
+        
+        document.getElementById('hide-warning-btn').addEventListener('click', function() {
+            const warning = document.getElementById('expiry-warning-system');
+            if (warning) {
+                warning.style.animation = 'slideDownWarning 0.4s ease-out reverse';
+                setTimeout(() => {
+                    warning.remove();
+                    document.body.style.paddingTop = '0px';
+                }, 400);
+            }
+        });
+    }
+    
+    // 🥷 نظام الحماية الصامت والذكي
+    function initSilentProtection() {
+        
+        // إنشاء الأساليب المرئية الخفيفة
+        createSubtleEffects();
+        
+        // 🖱️ منع النقر الأيمن صامتاً
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (SYSTEM_CONFIG.subtleEffects) {
+                triggerSubtleShake();
+                logSecurityEvent('منع النقر الأيمن');
+            }
+            
+            return false;
+        }, true);
+        
+        // ⌨️ منع اختصارات المفاتيح صامتاً
+        document.addEventListener('keydown', function(e) {
+            let blocked = false;
+            let eventType = '';
+            
+            // تحديد نوع العملية المحظورة
+            if (e.ctrlKey && e.keyCode === 85) { // Ctrl+U
+                blocked = true;
+                eventType = 'محاولة عرض مصدر الصفحة';
+            }
+            else if (e.ctrlKey && e.keyCode === 83) { // Ctrl+S
+                blocked = true;
+                eventType = 'محاولة حفظ الصفحة';
+            }
+            else if (e.keyCode === 123) { // F12
+                blocked = true;
+                eventType = 'محاولة فتح أدوات المطور';
+            }
+            else if (e.ctrlKey && e.shiftKey && e.keyCode === 73) { // Ctrl+Shift+I
+                blocked = true;
+                eventType = 'محاولة فتح أدوات المطور (بديل)';
+            }
+            else if (e.ctrlKey && e.shiftKey && e.keyCode === 67) { // Ctrl+Shift+C
+                blocked = true;
+                eventType = 'محاولة فحص العناصر';
+            }
+            else if (e.ctrlKey && e.keyCode === 65) { // Ctrl+A
+                blocked = true;
+                eventType = 'محاولة تحديد كامل المحتوى';
+            }
+            else if (e.ctrlKey && e.keyCode === 80) { // Ctrl+P
+                blocked = true;
+                eventType = 'محاولة طباعة (استخدم الزر المدمج)';
+            }
+            
+            if (blocked) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (SYSTEM_CONFIG.subtleEffects) {
+                    triggerSubtleShake();
+                    logSecurityEvent(eventType);
+                }
+                
+                return false;
+            }
+        }, true);
+        
+        // 📋 منع التحديد والنسخ صامتاً
+        document.addEventListener('selectstart', function(e) { 
+            e.preventDefault(); 
+            if (SYSTEM_CONFIG.subtleEffects) {
+                triggerSubtleShake();
+                logSecurityEvent('محاولة تحديد النص');
+            }
+            return false; 
+        }, true);
+        
+        document.addEventListener('dragstart', function(e) { 
+            e.preventDefault(); 
+            return false; 
+        }, true);
+        
+        document.addEventListener('drop', function(e) { 
+            e.preventDefault(); 
+            return false; 
+        }, true);
+        
+        document.addEventListener('dragover', function(e) { 
+            e.preventDefault(); 
+            return false; 
+        }, true);
+        
+        document.addEventListener('copy', function(e) { 
+            e.preventDefault(); 
+            if (SYSTEM_CONFIG.subtleEffects) {
+                triggerSubtleShake();
+                logSecurityEvent('محاولة نسخ المحتوى');
+            }
+            return false; 
+        }, true);
+        
+        // 🔍 مراقبة أدوات المطور صامتة
+        let devtoolsMonitor = {
+            open: false,
+            lastAlert: 0
+        };
+        
+        function silentDevToolsDetection() {
+            const threshold = 160;
+            const widthCheck = window.outerWidth - window.innerWidth > threshold;
+            const heightCheck = window.outerHeight - window.innerHeight > threshold;
+            const now = Date.now();
+            
+            if (widthCheck || heightCheck) {
+                if (!devtoolsMonitor.open && (now - devtoolsMonitor.lastAlert > 3000)) {
+                    devtoolsMonitor.open = true;
+                    devtoolsMonitor.lastAlert = now;
+                    
+                    if (SYSTEM_CONFIG.subtleEffects) {
+                        triggerSubtleShake();
+                        logSecurityEvent('رصد فتح أدوات المطور');
+                    }
+                    
+                    // تنظيف الكونسول برسائل حماية
+                    setTimeout(() => {
+                        console.clear();
+                        console.log('%c🔒 Golden Veins HQ - نظام الحماية النشط', 'color: #007bff; font-size: 16px; font-weight: bold;');
+                        console.log('%c⚖️ هذا المحتوى محمي بحقوق الطبع والنشر', 'color: #dc3545; font-size: 14px;');
+                        console.log('%c📞 للاستفسار: واتساب 9660544895046', 'color: #25d366; font-size: 12px;');
+                    }, 100);
+                }
+            } else {
+                devtoolsMonitor.open = false;
+            }
+        }
+        
+        setInterval(silentDevToolsDetection, 1500);
+        
+        // رسائل الكونسول الترحيبية
+        console.clear();
+        console.log('%c💎 Golden Veins HQ', 'color: #007bff; font-size: 20px; font-weight: bold;');
+        console.log('%c📋 نموذج خطابات قبول الطلاب', 'color: #28a745; font-size: 14px;');
+        console.log('%c🔒 محمي بحقوق الطبع والنشر', 'color: #dc3545; font-size: 12px;');
+        console.log('%c', 'border-bottom: 1px solid #007bff;');
+    }
+    
+    // 🎨 إنشاء التأثيرات البصرية الخفيفة
+    function createSubtleEffects() {
+        // إضافة أساليب CSS للتأثيرات
+        if (!document.querySelector('#subtle-effects-style')) {
+            const style = document.createElement('style');
+            style.id = 'subtle-effects-style';
+            style.textContent = `
+                @keyframes subtleShake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-1px); }
+                    75% { transform: translateX(1px); }
+                }
+                
+                @keyframes subtleBlink {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.98; }
+                }
+                
+                .protection-active {
+                    animation: subtleShake 0.3s ease-in-out, subtleBlink 0.2s ease-in-out;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+    
+    // 🥷 تشغيل تأثير الاهتزاز الخفيف
+    function triggerSubtleShake() {
+        document.body.classList.remove('protection-active');
+        
+        // إضافة التأثير
+        setTimeout(() => {
+            document.body.classList.add('protection-active');
+        }, 10);
+        
+        // إزالة التأثير
+        setTimeout(() => {
+            document.body.classList.remove('protection-active');
+        }, 350);
+    }
+    
+    // 📊 تسجيل أحداث الأمان في الكونسول (للمطور فقط)
+    function logSecurityEvent(eventType) {
+        if (SYSTEM_CONFIG.debugMode) {
+            console.log(`%c🛡️ حدث أمني: ${eventType}`, 'color: #ff6b6b; font-size: 12px;');
+            console.log(`%c   الوقت: ${new Date().toLocaleTimeString('ar-SA')}`, 'color: #666; font-size: 10px;');
+        }
+    }
+    
+    // 🚀 تشغيل النظام عند تحميل الصفحة
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeSystem);
+    } else {
+        initializeSystem();
+    }
+    
+})();
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1174,7 +1620,7 @@ header p {
                 <div class="form-row">
                     <div class="input-group">
                         <label for="currentSchool" id="currentSchoolLabel">اسم المدرسة الحالية والمرحلة:</label>
-                        <input type="text" id="currentSchool" placeholder="مثال: مدرسة الأمل الابتدائية">
+                        <input type="text" id="currentSchool" placeholder="مثال: الأمل الابتدائية">
                     </div>
                     <div class="input-group">
                         <label for="currentDirector" id="currentDirectorLabel">اسم مدير المدرسة الحالية:</label>
@@ -1204,7 +1650,7 @@ header p {
                 <div class="form-row">
                     <div class="input-group">
                         <label for="fromSchool">اسم المدرسة المنقول منها:</label>
-                        <input type="text" id="fromSchool" placeholder="مثال: مدرسة النور [ بدون كتابة المرحلة ]">
+                        <input type="text" id="fromSchool" placeholder="مثال: النور [ بدون كتابة المرحلة ]">
                     </div>
                     <div class="input-group">
                         <label for="educationLevel">المرحلة التعليمية:</label>
@@ -1223,8 +1669,8 @@ header p {
                         <input type="text" id="studentName" placeholder="مثال: محمد أحمد العلي">
                     </div>
                     <div class="input-group">
-                        <label for="studentNationality">جنسية الطالب:</label>
-                        <input type="text" id="studentNationality" placeholder="مثال: سعودي">
+                        <label for="studentNationality">جنسية الطالبـ/ ـة:</label>
+                        <input type="text" id="studentNationality" placeholder="مثال: سعودي/ سعودية">
                     </div>
                 </div>
                 <div class="form-row">
@@ -1790,9 +2236,9 @@ header p {
 
         function quickFillData() {
             if (confirm('ملء البيانات تلقائياً للاختبار؟')) {
-                document.getElementById('currentSchool').value = 'مدرسة الأمل الابتدائية';
+                document.getElementById('currentSchool').value = 'الأمل الابتدائية';
                 document.getElementById('currentDirector').value = 'أحمد محمد السعيد';
-                document.getElementById('fromSchool').value = 'مدرسة النور الابتدائية';
+                document.getElementById('fromSchool').value = 'النور';
                 document.getElementById('educationLevel').value = 'الابتدائية';
                 document.getElementById('studentName').value = 'محمد أحمد العلي';
                 document.getElementById('studentNationality').value = 'سعودي';
